@@ -14,6 +14,9 @@ export default defineConfig({
       },
       output: {
         manualChunks: undefined,
+        assetFileNames: "assets/[name][extname]",
+        chunkFileNames: "assets/[name].js",
+        entryFileNames: "assets/[name].js",
       },
     },
   },
