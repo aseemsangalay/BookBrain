@@ -1,8 +1,16 @@
+/**
+ * BookBrain - A React application for managing book insights
+ *
+ * This component serves as the main container for the application.
+ * It manages the state of insights and handles all CRUD operations.
+ */
+
 import React, { useState, useEffect } from "react";
 import InsightForm from "./components/InsightForm";
 import { loadInsights, saveInsights } from "./utils/storage";
 import "./App.css";
 
+// Sample insights to initialize the application
 const SAMPLE_INSIGHTS = [
   {
     title: "The Power of Habit",
@@ -31,22 +39,31 @@ const SAMPLE_INSIGHTS = [
   },
 ];
 
+/**
+ * Main App component
+ * @returns {JSX.Element} The rendered application
+ */
 function App() {
+  // State management
   const [insights, setInsights] = useState([]);
   const [expandedInsight, setExpandedInsight] = useState(null);
 
+  // Load insights from localStorage on component mount
   useEffect(() => {
-    // Load insights from local storage on mount
     const savedInsights = loadInsights();
     if (savedInsights && savedInsights.length > 0) {
       setInsights(savedInsights);
     } else {
-      // If no saved insights, initialize with sample insights
+      // Initialize with sample insights if no saved insights exist
       setInsights(SAMPLE_INSIGHTS);
       saveInsights(SAMPLE_INSIGHTS);
     }
   }, []);
 
+  /**
+   * Handles adding a new insight
+   * @param {Object} newInsight - The new insight to add
+   */
   const handleAddInsight = (newInsight) => {
     if (!newInsight.title?.trim() || !newInsight.text?.trim()) return;
     const updatedInsights = [...insights, newInsight];
@@ -54,6 +71,10 @@ function App() {
     saveInsights(updatedInsights);
   };
 
+  /**
+   * Handles deleting an insight
+   * @param {number} timestamp - The timestamp of the insight to delete
+   */
   const handleDeleteInsight = (timestamp) => {
     const updatedInsights = insights.filter(
       (insight) => insight.timestamp !== timestamp
@@ -65,10 +86,17 @@ function App() {
     }
   };
 
+  /**
+   * Handles clicking on an insight to expand it
+   * @param {Object} insight - The insight to expand
+   */
   const handleInsightClick = (insight) => {
     setExpandedInsight(insight);
   };
 
+  /**
+   * Handles clearing all insights
+   */
   const handleClearAllInsights = () => {
     setInsights([]);
     saveInsights([]);
@@ -77,7 +105,7 @@ function App() {
   return (
     <div className="min-h-screen bg-black text-white p-4">
       <div className="max-w-7xl mx-auto">
-        {/* Main content form */}
+        {/* Header and Form Section */}
         <div className="relative z-10 flex flex-col items-center p-8 bg-gray-800 rounded-lg shadow-lg max-w-sm w-full mx-auto mb-8">
           <h1 className="text-4xl font-bold mb-4 text-center">BookBrain</h1>
           <p className="text-lg mb-8 text-gray-400 text-center">
@@ -92,7 +120,7 @@ function App() {
           </button>
         </div>
 
-        {/* Insight Cards */}
+        {/* Insights Grid */}
         <div className="relative z-0">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {insights.map((insight) => (
@@ -115,7 +143,7 @@ function App() {
         </div>
       </div>
 
-      {/* Expanded Insight Modal */}
+      {/* Modal for Expanded Insight */}
       {expandedInsight && (
         <div
           className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center p-4 z-50"
