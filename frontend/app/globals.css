@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=JetBrains+Mono:wght@300;400;500&family=Crimson+Pro:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: #0D0D0D;
+    color: #F2EDE4;
+    font-family: 'Crimson Pro', Georgia, serif;
+    line-height: 1.65;
+  }
+
+  ::selection {
+    background-color: rgba(232, 213, 163, 0.25);
+    color: #F2EDE4;
+  }
+
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0D0D0D;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #2A2A2A;
+    border-radius: 2px;
+  }
+}
+
+@layer components {
+  /* Grid cells for activity heatmap */
+  .grid-cell {
+    @apply w-3 h-3 rounded-[2px] transition-all duration-150;
+  }
+
+  .grid-cell-0 { background-color: #1A1A1A; }
+  .grid-cell-1 { background-color: #3A3020; }
+  .grid-cell-2 { background-color: #6B5A30; }
+  .grid-cell-3 { background-color: #B8985A; }
+  .grid-cell-4 { background-color: #E8D5A3; }
+
+  /* Media type badge */
+  .badge {
+    @apply inline-flex items-center px-2 py-0.5 rounded-sm text-label font-mono uppercase tracking-widest;
+  }
+
+  /* Divider line */
+  .divider {
+    @apply w-full h-px bg-border;
+  }
+
+  /* Card surface */
+  .card {
+    @apply bg-surface border border-border rounded-sm p-5 transition-all duration-200 hover:border-border-light;
+  }
+
+  /* Input base */
+  .input-base {
+    @apply w-full bg-transparent border border-border rounded-sm px-3 py-2 text-ink text-body
+           font-body placeholder-muted focus:outline-none focus:border-accent-dim transition-colors duration-150;
+  }
+
+  /* Button variants */
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-5 py-2.5 bg-accent text-bg text-label font-mono font-medium
+           uppercase tracking-widest rounded-sm transition-all duration-150
+           hover:bg-accent-dim active:scale-[0.98];
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 px-4 py-2 text-muted-light text-label font-mono
+           uppercase tracking-widest border border-border rounded-sm transition-all duration-150
+           hover:border-border-light hover:text-ink;
+  }
+
+  .btn-danger {
+    @apply inline-flex items-center gap-2 px-4 py-2 text-red-400 text-label font-mono
+           uppercase tracking-widest border border-red-900/40 rounded-sm transition-all duration-150
+           hover:border-red-700/60 hover:text-red-300;
+  }
+}

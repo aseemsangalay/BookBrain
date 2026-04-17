@@ -1,0 +1,17 @@
+# Backend secrets
+backend/.env
+backend/venv/
+backend/__pycache__/
+backend/app/__pycache__/
+**/__pycache__/
+*.pyc
+
+# Frontend secrets (already in frontend/.gitignore but belt+suspenders)
+frontend/.env.local
+frontend/.env*.local
+frontend/.next/
+frontend/node_modules/
+
+# Root
+node_modules/
+.DS_Store
